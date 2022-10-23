@@ -7,6 +7,7 @@ import base64, json
 import argparse
 from botocore.exceptions import ClientError
 from requests.auth import HTTPBasicAuth
+from get_public_ip import get_public_ip
 
 proxies = {
               "http"  : "http://192.168.42.120:8080",
@@ -85,7 +86,7 @@ def update_domain_ip(domain, username):
                 host_or_fqdn,host_or_fqdn_value = get_host_or_fqdn(record) 
                 data = {host_or_fqdn:host_or_fqdn_value,"type":"A","answer":public_ip,"ttl":300}
                 print(data)
-                update_resp = requests.put('https://api.name.com/v4/domains/{domain}/records/{record_id}'.format(domain=domain, record_id=record['id']), auth=HTTPBasicAuth(username, api_key), json=data, proxies=proxies, verify=False)
+                update_resp = requests.put('https://api.name.com/v4/domains/{domain}/records/{record_id}'.format(domain=domain, record_id=record['id']), auth=HTTPBasicAuth(username, api_key), json=data, headers=headers)
                 print(update_resp.content)
 
 def get_host_or_fqdn(record):
@@ -93,11 +94,6 @@ def get_host_or_fqdn(record):
         return 'host',record['host']
     elif 'fqdn' in record:
         return 'fqdn',record['fqdn']
-
-def get_public_ip():
-    r = requests.get('http://ip.me/')
-    public_ip = r.content.decode('utf-8')
-    return public_ip
 
 def main():
     parser = argparse.ArgumentParser(description='A python script used to update the IP address for domains you own on name.com')

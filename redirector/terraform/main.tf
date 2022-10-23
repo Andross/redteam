@@ -45,7 +45,7 @@ resource "aws_instance" "redirector-docker" {
   aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 758167305575.dkr.ecr.us-east-1.amazonaws.com
   docker pull 758167305575.dkr.ecr.us-east-1.amazonaws.com/mw-rt-v1:redirector
 
-  docker create --name redirector -e AWS_ACCESS_KEY_ID=$KEYID -e AWS_SECRET_ACCESS_KEY=$SECRETKEY -e AWS_SESSION_TOKEN=$SECURITYTOKEN -p3333:3333 758167305575.dkr.ecr.us-east-1.amazonaws.com/mw-rt-v1:redirector 
+  docker create --name redirector -e AWS_DEFAULT_REGION=us-east-1 -e AWS_ACCESS_KEY_ID=$KEYID -e AWS_SECRET_ACCESS_KEY=$SECRETKEY -e AWS_SESSION_TOKEN=$SECURITYTOKEN -p80:80 -p443:443 758167305575.dkr.ecr.us-east-1.amazonaws.com/mw-rt-v1:redirector 
 
   docker start redirector
 
