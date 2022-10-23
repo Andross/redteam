@@ -17,6 +17,7 @@
     "migrations_prefix": "db/db_",
     "contact_address": "",
     "logging": {
-            "filename": "gophish.log"
+            "filename": "gophish.log",
+            "level":"debug"
     }
 }

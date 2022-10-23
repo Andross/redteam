@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import requests, re, urllib, html, secrets, string
-import traceback, os, json
+import traceback, os, json, boto3
+import base64
+from botocore.exceptions import ClientError
 # def get_first_csrf_token():
 #     headers = {}
 #     r = requests.get('https://localhost:3333/', verify=False)
@@ -8,6 +10,72 @@ proxies = {
               "http"  : "http://192.168.42.120:8080",
               "https" : "http://192.168.42.120:8080"
             }
+
+def get_info_at_mw_secret():
+
+    secret_name = "gp-info-at-moveworks"
+    region_name = "us-east-1"
+
+    # Create a Secrets Manager client
+    session = boto3.session.Session()
+    client = session.client(
+        service_name='secretsmanager',
+        region_name=region_name
+    )
+
+    # In this sample we only handle the specific exceptions for the 'GetSecretValue' API.
+    # See https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+    # We rethrow the exception by default.
+
+    try:
+        get_secret_value_response = client.get_secret_value(
+            SecretId=secret_name
+        )
+    except ClientError as e:
+        if e.response['Error']['Code'] == 'DecryptionFailureException':
+            # Secrets Manager can't decrypt the protected secret text using the provided KMS key.
+            # Deal with the exception here, and/or rethrow at your discretion.
+            raise e
+        elif e.response['Error']['Code'] == 'InternalServiceErrorException':
+            # An error occurred on the server side.
+            # Deal with the exception here, and/or rethrow at your discretion.
+            raise e
+        elif e.response['Error']['Code'] == 'InvalidParameterException':
+            # You provided an invalid value for a parameter.
+            # Deal with the exception here, and/or rethrow at your discretion.
+            raise e
+        elif e.response['Error']['Code'] == 'InvalidRequestException':
+            # You provided a parameter value that is not valid for the current state of the resource.
+            # Deal with the exception here, and/or rethrow at your discretion.
+            raise e
+        elif e.response['Error']['Code'] == 'ResourceNotFoundException':
+            # We can't find the resource that you asked for.
+            # Deal with the exception here, and/or rethrow at your discretion.
+            raise e
+    else:
+        # Decrypts secret using the associated KMS key.
+        # Depending on whether the secret is a string or binary, one of these fields will be populated.
+        if 'SecretString' in get_secret_value_response:
+            secret = get_secret_value_response['SecretString']
+            return secret
+        else:
+            decoded_binary_secret = base64.b64decode(get_secret_value_response['SecretBinary'])
+            return decoded_binary_secret
+
+def create_sending_profiles(url, cookies, api_key): 
+    try:
+        host = "smtp.gmail.com:587"
+        username = "info.at.moveworks@gmail.com"
+        info_at_mw_secret = get_info_at_mw_secret()
+        name = "info at moveworks"
+        data = json.loads('{{"headers":[],"name":"{name}","interface_type":"SMTP","from_address":"{from_host}","host":"{host}","username":"{username}","password":"{secret}","ignore_cert_errors":true}}'.format(name=name, from_host=host, host=host, username=username, secret=info_at_mw_secret), strict=False)
+        headers = {"Content-Type":"application/json", "Authorization" : "Bearer {api_key}".format(api_key=api_key)}
+        r = requests.post(url, cookies=cookies, json=data, headers=headers, verify=False)
+        if r.status_code == 201:
+            print("Successfully created send profile {name}".format(name=name))
+
+    except Exception:
+        print(traceback.format_exc())
 
 def import_email_templates(url, cookies, api_key):
     import os

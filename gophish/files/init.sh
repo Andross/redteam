@@ -1,6 +1,6 @@
 #!/bin/bash
 
-chmod +x gophish change_password.py run-gophish.sh 
+chmod +x gophish setup-gophish.py
 
 ./gophish &
 
