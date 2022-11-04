@@ -117,16 +117,21 @@ def get_description(filename):
 
 def verify_correct_date_time_format(date):
   if date is not None:
-    pattern = re.compile("[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}")
-    correct_date_pattern = pattern.match(date)
-    return correct_date_pattern
+    date_with_offset = re.compile("[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}")
+    date_no_offset = re.compile("[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}")
+    correct_date_with_offset_pattern = date_with_offset.match(date)
+    correct_date_no_offset_pattern = date_no_offset.match(date)
+    if correct_date_with_offset_pattern:
+      return correct_date_with_offset_pattern
+    elif correct_date_no_offset_pattern:
+      return correct_date_no_offset_pattern
   else:
     return False
 
 def main(flags): 
   
   service = auth(flags)
-  print(flags)
+  # print(flags)
   if flags.start_time is None:
     start_time, end_time = create_date_time_gcal()
   else:
@@ -153,12 +158,15 @@ def main(flags):
   'description': description,
   'start': {
     'dateTime': '{start_time}'.format(start_time=start_time),
-    'timeZone': 'America/Los_Angeles',
+    'timeZone': 'America/New_York',
+    #'timeZone': 'America/Los_Angeles',
   },
   'end': {
     'dateTime': '{end_time}'.format(end_time=end_time),
-    'timeZone': 'America/Los_Angeles',
+    'timeZone': 'America/New_York',
+    #'timeZone': 'America/Los_Angeles',
   },
+  'guestsCanSeeOtherGuests': False,
   # 'recurrence': [
   #   'RRULE:FREQ=DAILY;COUNT=1'
   # ],
@@ -166,7 +174,7 @@ def main(flags):
   'reminders': {
     'useDefault': False,
     'overrides': [
-      {'method': 'email', 'minutes': 24 * 60},
+      {'method': 'email', 'minutes': 10},
       {'method': 'popup', 'minutes': 10},
     ],
   },

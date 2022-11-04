@@ -14,12 +14,12 @@ resource "aws_instance" "redirector-docker" {
   instance_type        = "t2.micro"
   iam_instance_profile = "rt-docker-s3-access"
   key_name             = "Redirector"
-  security_groups      = ["Redirector-SG"]
+  security_groups      = ["Redirector-SG-MW-IPs-Only"]
   user_data            = <<-EOL
   #!/bin/bash -xe
 
   apt update
-  apt-get install \
+  apt-get install -y \
     ca-certificates \
     curl \
     gnupg \

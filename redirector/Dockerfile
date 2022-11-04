@@ -21,10 +21,16 @@ RUN pip3 install --upgrade awscli
 RUN pip3 install -r scripts/redirector_ip/requirements.txt
 
 # RUN python3 scripts/update-ip-address.py -d oddcron.ninja -u andross561
+# can be name, namecheap (not complete yet), or none
+ENV REGISTRAR="none"
 
-ENV DOMAIN="oddcron.ninja"
+ENV DOMAIN="moveworks.co"
 #ENV C2IP="127.0.0.1"
 ENV C2IP="167.71.16.171"
+
+ENV PHISHIP="3.80.70.47"
+
+ENV PHISHING_LURES_REGEX="(healthjoy|hj|auth|asana|enduser/report-suspicious-activity|adp)"
 
 ENV CERTBOT_EMAIL="movveworks@gmail.com"
 

